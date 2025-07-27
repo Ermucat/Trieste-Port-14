@@ -58,3 +58,17 @@
     targetWeather: "CloudStorm"
     returnWeather: "Rain"
     lightning: true
+
+- type: entity
+  parent: Traitor
+  id: NTTraitor
+  components:
+  - type: TraitorRule
+    syndicateChance: 0
+
+- type: entity
+  parent: Traitor
+  id: SyndicateTraitor
+  components:
+  - type: TraitorRule
+    syndicateChance: 100

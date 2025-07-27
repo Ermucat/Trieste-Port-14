@@ -77,7 +77,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     {
         Log.Debug($"AfterAntagEntitySelected {ToPrettyString(ent)}");
 
-        var isSyndicate = _random.Prob(0.5f);
+        var isSyndicate = _random.Prob(ent.Comp.SyndicateChance);
 
         if (isSyndicate)
         {

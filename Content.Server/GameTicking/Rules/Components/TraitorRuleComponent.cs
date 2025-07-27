@@ -52,6 +52,13 @@ public sealed partial class TraitorRuleComponent : Component
     public bool GiveUplinkNT = true;
 
     /// <summary>
+    /// Give the NT traitors an Uplink on spawn.
+    /// </summary>
+    [DataField]
+    public float SyndicateChance = 0.5f;
+
+
+    /// <summary>
     /// Give this traitor the codewords.
     /// </summary>
     [DataField]

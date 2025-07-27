@@ -22,7 +22,12 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
 
     [ValidatePrototypeId<EntityPrototype>]
-    private const string DefaultTraitorRule = "Traitor";
+    private const string DefaultTraitorRule = "SyndicateTraitor"; // Trieste Change - forces it to always be syndicate traitor
+
+    // Trieste Change - adds NT traitor rule
+    [ValidatePrototypeId<EntityPrototype>]
+    private const string DefaultNTTraitorRule = "NTTraitor";
+    // Trieste Change
 
     [ValidatePrototypeId<EntityPrototype>]
     private const string DefaultInitialInfectedRule = "Zombie";
@@ -71,6 +76,23 @@ public sealed partial class AdminVerbSystem
             Message = string.Join(": ", traitorName,  Loc.GetString("admin-verb-make-traitor")),
         };
         args.Verbs.Add(traitor);
+
+        // Trieste Start
+        var NTtraitorName = Loc.GetString("admin-verb-make-NTtraitor");
+        Verb NTtraitor = new()
+        {
+            Text = NTtraitorName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/job_icons.rsi"), "Nanotrasen"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<TraitorRuleComponent>(targetPlayer, DefaultNTTraitorRule);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", NTtraitorName,  Loc.GetString("admin-verb-make-NTtraitor")),
+        };
+        args.Verbs.Add(NTtraitor);
+        // Triest End
 
         var initialInfectedName = Loc.GetString("admin-verb-text-make-initial-infected");
         Verb initialInfected = new()
